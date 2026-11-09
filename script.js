@@ -11,14 +11,8 @@ const CONFIG = {
     end: "20261213T140000",
     details: "Dengan bahagia kami mengundang Anda ke acara pernikahan kami.",
   },
-  gallery: [
-    "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=400&q=80",
-    "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=400&q=80",
-    "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=400&q=80",
-    "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=400&q=80",
-    "https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=400&q=80",
-    "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=400&q=80",
-  ],
+  // Foto lokal di folder galeri/. Tambahkan nama file baru di sini.
+  gallery: ["galeri/1.jpg", "galeri/2.jpg", "galeri/3.jpg"],
 };
 
 /* ========================================================================
@@ -202,18 +196,57 @@ function initGallery() {
   const grid = $("#galleryGrid");
   const fragment = document.createDocumentFragment();
   CONFIG.gallery.forEach((src, i) => {
-    const item = document.createElement("div");
+    const item = document.createElement("button");
+    item.type = "button";
     item.className = "gallery__item fx-up";
     item.dataset.delay = i * 80;
+    item.setAttribute("aria-label", "Perbesar foto " + (i + 1));
     const img = document.createElement("img");
     img.src = src;
     img.alt = "Foto galeri " + (i + 1);
     img.loading = "lazy";
     item.appendChild(img);
+    item.addEventListener("click", () => openLightbox(src, img.alt));
     fragment.appendChild(item);
   });
   grid.appendChild(fragment);
   applyDelays(grid);
+  initLightbox();
+}
+
+/* Pop up foto (lightbox) */
+let lastFocused = null;
+
+function openLightbox(src, alt) {
+  const box = $("#lightbox");
+  lastFocused = document.activeElement;
+  $("#lightboxImg").src = src;
+  $("#lightboxImg").alt = alt;
+  box.classList.add("is-open");
+  box.setAttribute("aria-hidden", "false");
+  document.body.classList.add("no-scroll");
+  $("#lightboxClose").focus();
+}
+
+function closeLightbox() {
+  const box = $("#lightbox");
+  if (!box.classList.contains("is-open")) return;
+  box.classList.remove("is-open");
+  box.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("no-scroll");
+  if (lastFocused) lastFocused.focus();
+}
+
+function initLightbox() {
+  const box = $("#lightbox");
+  $("#lightboxClose").addEventListener("click", closeLightbox);
+  // klik area gelap (di luar foto) menutup pop up
+  box.addEventListener("click", (e) => {
+    if (e.target === box) closeLightbox();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeLightbox();
+  });
 }
 
 /* ========================================================================
@@ -226,6 +259,31 @@ function revealOnScroll() {
       el.classList.add("is-shown");
     }
   });
+}
+
+/* ========================================================================
+   8b. Animasi per-elemen saat masuk layar (mempelai bergantian)
+   Di layar kecil kartu tersusun ke bawah, jadi tiap kartu dianimasikan
+   tepat ketika ia terlihat saat di-scroll, bukan bersamaan.
+   ======================================================================== */
+function initInViewFx() {
+  const targets = $$(".fx-slide-left, .fx-slide-right, .fx-scale");
+  if (!("IntersectionObserver" in window)) {
+    targets.forEach((el) => el.classList.add("is-in"));
+    return;
+  }
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-in");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.3, rootMargin: "0px 0px -10% 0px" }
+  );
+  targets.forEach((el) => observer.observe(el));
 }
 
 /* ========================================================================
@@ -350,6 +408,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initCountdown();
   initSaveDate();
   initGallery();
+  initInViewFx();
   initNavbar();
   initRsvp();
   initWishes();

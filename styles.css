@@ -439,9 +439,10 @@ body.locked {
 
 .is-shown .fx-up,
 .is-shown .fx-fade,
-.is-shown .fx-slide-left,
-.is-shown .fx-slide-right,
-.is-shown .fx-scale,
+/* slide & scale muncul sendiri-sendiri saat masuk layar (class .is-in, lihat script.js) */
+.fx-slide-left.is-in,
+.fx-slide-right.is-in,
+.fx-scale.is-in,
 .cover .fx-fade.is-shown,
 .cover .fx-letters.is-shown {
   opacity: 1;
@@ -1106,4 +1107,87 @@ body.locked {
   .dove--1 { width: 72px; }
   .dove--2 { width: 54px; }
   .dove--3 { width: 40px; }
+}
+
+/* ========================================================================
+   Galeri lokal & Pop up foto (lightbox)
+   ======================================================================== */
+button.gallery__item {
+  border: none;
+  background: var(--color-cream);
+  padding: 0;
+  padding-top: 100%;
+  display: block;
+  width: 100%;
+}
+
+button.gallery__item:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+body.no-scroll {
+  overflow: hidden;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(20, 14, 9, 0.88);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.lightbox.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox__img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+  border: 3px solid var(--color-gold);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  transform: scale(0.9);
+  transition: transform 0.35s ease;
+}
+
+.lightbox.is-open .lightbox__img {
+  transform: scale(1);
+}
+
+.lightbox__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--color-dark);
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.lightbox__close:hover {
+  background: var(--color-gold);
+  transform: rotate(90deg);
+}
+
+.lightbox__close:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 3px;
 }
