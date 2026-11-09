@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Undangan Pernikahan — Aziz & Echa" />
+  <title>Undangan Pernikahan — Aziz &amp; Echa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Poppins:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Great+Vibes&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- ======================= COVER / PEMBUKA ======================= -->
+  <section class="cover" id="cover">
+    <div class="cover__batik" aria-hidden="true"></div>
+    <div class="cover__overlay"></div>
+    <div class="cover__frame" aria-hidden="true"></div>
+
+    <div class="cover__content">
+      <p class="cover__eyebrow fx-fade" data-delay="100">· ᮝᮤᮜᮥᮏᮩᮀ · <br/> Selamat Datang</p>
+      <p class="cover__pre fx-fade" data-delay="250">Undangan Pernikahan</p>
+      <h1 class="cover__names">
+        <span class="fx-letters" data-delay="400">Aziz</span>
+        <span class="cover__amp fx-fade" data-delay="900">&amp;</span>
+        <span class="fx-letters" data-delay="1100">Echa</span>
+      </h1>
+      <div class="cover__ornament fx-fade" data-delay="1600">❧ ✿ ❧</div>
+      <p class="cover__date fx-fade" data-delay="1800">Minggu, 13 Desember 2026</p>
+
+      <div class="cover__guest fx-fade" data-delay="2000">
+        <p class="cover__guest-label">Kepada Yth. Bapak/Ibu/Saudara/i</p>
+        <p class="cover__guest-name" id="guestName">Tamu Undangan</p>
+      </div>
+
+      <button class="btn btn--open fx-fade" data-delay="2200" id="openInvitation">
+        <span class="btn__icon">✉</span> Buka Undangan
+      </button>
+    </div>
+    <div class="cover__scroll-hint">geser ke bawah</div>
+  </section>
+
+  <!-- Musik pengiring -->
+  <button class="music-toggle" id="musicToggle" aria-label="Putar musik" title="Putar / jeda musik">
+    <span class="music-toggle__bars" id="musicIcon"><i></i><i></i><i></i><i></i></span>
+  </button>
+  <audio id="bgMusic" loop preload="auto">
+    <!-- Ganti dengan lagu pilihan Anda. -->
+    <source src="leberch-wedding-584474.mp3" type="audio/mpeg"/>
+  </audio>
+
+  <!-- ======================= KONTEN UTAMA ======================= -->
+  <main class="main" id="mainContent">
+    <!-- SALAM / AYAT -->
+    <section class="section section--quote reveal" id="salam">
+      <div class="mega" aria-hidden="true"></div>
+      <div class="container">
+        <p class="quote__bismillah fx-up" data-delay="1500">﷽</p>
+        <p class="quote__text fx-up" data-delay="1800">
+          "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan
+          pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung
+          dan merasa tenteram kepadanya."
+        </p>
+        <p class="quote__source fx-up" data-delay="2100">— QS. Ar-Rum: 21</p>
+      </div>
+
+      <!-- Animasi pembuka: tirai terbuka + merpati terbang -->
+      <div class="salam-intro" aria-hidden="true">
+        <div class="curtain curtain--left"></div>
+        <div class="curtain curtain--right"></div>
+
+        <svg class="dove dove--1" viewBox="0 0 100 60" focusable="false">
+          <path class="dove__wing dove__wing--back" d="M46 32C44 14 30 6 12 8c10 8 18 18 26 30z" fill="#efe9dc" stroke="#d3c9b4" stroke-width=".8"/>
+          <path d="M8 42l18-7c12-10 32-8 44-2 8 3 14 0 20-6 2 8-2 16-12 18-16 6-40 4-52 0z" fill="#fff" stroke="#d3c9b4" stroke-width=".8"/>
+          <path d="M90 28l9 2-9 2z" fill="#c9a24b"/>
+          <circle cx="84" cy="30" r="1.5" fill="#33281d"/>
+          <path class="dove__wing" d="M50 34C48 12 30 2 8 4c12 10 22 22 32 36z" fill="#fff" stroke="#d3c9b4" stroke-width=".8"/>
+        </svg>
+
+        <svg class="dove dove--2" viewBox="0 0 100 60" focusable="false">
+          <path class="dove__wing dove__wing--back" d="M46 32C44 14 30 6 12 8c10 8 18 18 26 30z" fill="#efe9dc" stroke="#d3c9b4" stroke-width=".8"/>
+          <path d="M8 42l18-7c12-10 32-8 44-2 8 3 14 0 20-6 2 8-2 16-12 18-16 6-40 4-52 0z" fill="#fff" stroke="#d3c9b4" stroke-width=".8"/>
+          <path d="M90 28l9 2-9 2z" fill="#c9a24b"/>
+          <circle cx="84" cy="30" r="1.5" fill="#33281d"/>
+          <path class="dove__wing" d="M50 34C48 12 30 2 8 4c12 10 22 22 32 36z" fill="#fff" stroke="#d3c9b4" stroke-width=".8"/>
+        </svg>
+
+        <svg class="dove dove--3" viewBox="0 0 100 60" focusable="false">
+          <path class="dove__wing dove__wing--back" d="M46 32C44 14 30 6 12 8c10 8 18 18 26 30z" fill="#efe9dc" stroke="#d3c9b4" stroke-width=".8"/>
+          <path d="M8 42l18-7c12-10 32-8 44-2 8 3 14 0 20-6 2 8-2 16-12 18-16 6-40 4-52 0z" fill="#fff" stroke="#d3c9b4" stroke-width=".8"/>
+          <path d="M90 28l9 2-9 2z" fill="#c9a24b"/>
+          <circle cx="84" cy="30" r="1.5" fill="#33281d"/>
+          <path class="dove__wing" d="M50 34C48 12 30 2 8 4c12 10 22 22 32 36z" fill="#fff" stroke="#d3c9b4" stroke-width=".8"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- MEMPELAI -->
+    <section class="section section--couple reveal" id="mempelai">
+      <div class="container">
+        <h2 class="section__title fx-up">Calon Mempelai</h2>
+        <p class="section__subtitle fx-up" data-delay="120">
+          Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud
+          menyelenggarakan pernikahan putra-putri kami.
+        </p>
+
+        <div class="couple">
+          <article class="couple__card fx-slide-left">
+            <div class="couple__photo">
+              <img
+                src="kuntet.png"
+                alt="Foto mempelai pria"
+                loading="lazy"
+              />
+            </div>
+            <h3 class="couple__name">Abdul Aziz Purabraja</h3>
+            <p class="couple__parent">
+              Putra kelima dari<br />
+              Bpk. Asep Saripudin
+            </p>
+            <a class="couple__ig" href="#" aria-label="Instagram Dimas"></a>
+          </article>
+
+          <div class="couple__amp fx-scale" style="padding:30px">&amp;</div>
+
+          <article class="couple__card fx-slide-right">
+            <div class="couple__photo">
+              <img
+                src="echa.png"
+                alt="Foto mempelai wanita"
+                loading="lazy"
+              />
+            </div>
+            <h3 class="couple__name">Retzsya Rahayu</h3>
+            <p class="couple__parent">
+              Putri ketiga dari<br />
+              Bpk. Rakes Rasyid
+            </p>
+            <a class="couple__ig" href="#" aria-label="Instagram Sarah"></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- HITUNG MUNDUR -->
+    <section class="section section--countdown reveal" id="countdown">
+      <div class="mega mega--light" aria-hidden="true"></div>
+      <div class="container">
+        <h2 class="section__title section__title--light fx-up">Menuju Hari Bahagia</h2>
+        <div class="countdown" id="countdownTimer">
+          <div class="countdown__item"><span class="countdown__num" id="days">0</span><span class="countdown__label">Hari</span></div>
+          <div class="countdown__item"><span class="countdown__num" id="hours">0</span><span class="countdown__label">Jam</span></div>
+          <div class="countdown__item"><span class="countdown__num" id="minutes">0</span><span class="countdown__label">Menit</span></div>
+          <div class="countdown__item"><span class="countdown__num" id="seconds">0</span><span class="countdown__label">Detik</span></div>
+        </div>
+        <a class="btn btn--outline fx-up" id="saveDate" href="#">+ Simpan Tanggal</a>
+      </div>
+    </section>
+
+    <!-- ACARA -->
+    <section class="section section--events reveal" id="acara">
+      <div class="container">
+        <h2 class="section__title fx-up">Rangkaian Acara</h2>
+        <div class="events">
+          <article class="event-card fx-up">
+            <div class="event-card__icon">💍</div>
+            <h3 class="event-card__title">Akad Nikah</h3>
+            <p class="event-card__date">Minggu, 13 Desember 2026</p>
+            <p class="event-card__time">10.00 WIB - Selesai</p>
+            <p class="event-card__place">Kp. Pasirandu Kamel RT 06 RW 03 Desa Sukasari<br />Kec. Serang Baru Kab. Bekasi</p>
+          </article>
+
+          <article class="event-card fx-up" data-delay="150">
+            <div class="event-card__icon">🎎</div>
+            <h3 class="event-card__title">Resepsi</h3>
+            <p class="event-card__date">Minggu, 13 Desember 2026</p>
+            <p class="event-card__time">08.00 WIB - Selesai</p>
+            <p class="event-card__place">Kp. Pasirandu Kamel RT 06 RW 03 Desa Sukasari<br />Kec. Serang Baru Kab. Bekasi</p>
+          </article>
+        </div>
+        <a class="btn btn--primary fx-up" href="https://maps.google.com" target="_blank" rel="noopener">📍 Lihat Lokasi</a>
+      </div>
+    </section>
+
+    <!-- GALERI -->
+    <section class="section section--gallery reveal" id="galeri">
+      <div class="container">
+        <h2 class="section__title fx-up">Galeri Kenangan</h2>
+        <div class="gallery" id="galleryGrid"></div>
+      </div>
+    </section>
+
+    <!-- RSVP -->
+    <section class="section section--rsvp reveal" id="rsvp">
+      <div class="mega mega--light" aria-hidden="true"></div>
+      <div class="container container--narrow">
+	  
+        <h2 class="section__title section__title--light fx-up">Wedding Gift</h2>
+        <p>Doa restu Anda merupakan karunia yang sangat berarti bagi kami, jika memberi adalah ungkapan tanda kasih Anda dapat memberi hadiah secara cashless</p>
+		<p><br/><h3>RETZSYA RAHAYU</h3>BNI <strong>1861928237</strong></p>
+		<p><br/><h3>ABDUL AZIZ PURA BRAJA</h3>BCA <strong>6881366565</strong></p>
+              
+        <form class="form" id="rsvpForm">          
+        </form>
+      </div>
+    </section>
+
+    <!-- UCAPAN -->
+    <section class="section section--wishes reveal" id="ucapan">
+      <div class="container container--narrow">
+        <h2 class="section__title fx-up">Ucapan &amp; Doa</h2>
+        <form class="form" id="wishForm">
+          <div class="form__group">
+            <label for="wishName">Nama</label>
+            <input type="text" id="wishName" name="name" required placeholder="Nama Anda" />
+          </div>
+          <div class="form__group">
+            <label for="wishMessage">Pesan</label>
+            <textarea id="wishMessage" name="message" rows="3" required placeholder="Tulis ucapan dan doa..."></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--full">Kirim Ucapan</button>
+        </form>
+        <ul class="wishes" id="wishList"></ul>
+      </div>
+    </section>
+
+    <!-- PENUTUP -->
+    <footer class="footer reveal" id="penutup">
+      <div class="container">
+        <p class="footer__thanks fx-up">Terima kasih atas doa dan restu Anda</p>
+        <h2 class="footer__names fx-scale">Aziz &amp; Echa</h2>
+        <p class="footer__credit fx-up">Wassalamu'alaikum Wr. Wb.</p>
+      </div>
+    </footer>
+  </main>
+
+  <!-- ======================= BOTTOM NAV BAR ======================= -->
+  <nav class="navbar" id="navbar" aria-label="Navigasi bagian">
+    <a class="navbar__item" href="#salam" data-target="salam" title="Salam">
+      <span class="navbar__icon">🕌</span><span class="navbar__label">Salam</span>
+    </a>
+    <a class="navbar__item" href="#mempelai" data-target="mempelai" title="Mempelai">
+      <span class="navbar__icon">👩‍❤️‍👨</span><span class="navbar__label">Mempelai</span>
+    </a>
+    <a class="navbar__item" href="#acara" data-target="acara" title="Acara">
+      <span class="navbar__icon">📅</span><span class="navbar__label">Acara</span>
+    </a>
+    <a class="navbar__item" href="#galeri" data-target="galeri" title="Galeri">
+      <span class="navbar__icon">📷</span><span class="navbar__label">Galeri</span>
+    </a>
+    <a class="navbar__item" href="#rsvp" data-target="rsvp" title="RSVP">
+      <span class="navbar__icon">🎁</span><span class="navbar__label">Gift</span>
+    </a>
+    <a class="navbar__item" href="#ucapan" data-target="ucapan" title="Ucapan">
+      <span class="navbar__icon">💌</span><span class="navbar__label">Ucapan</span>
+    </a>
+  </nav>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
