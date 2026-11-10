@@ -7,8 +7,8 @@ const CONFIG = {
   event: {
     title: "Pernikahan Aziz & Echa",
     location: "Kp. Pasirandu Kamel RT 06 RW 03 Desa Sukasari Kec. Serang Baru Kab. Bekasi",
-    start: "20261213T080000",
-    end: "20261213T140000",
+    start: "20261213T000000",
+    end: "20261213T235900",
     details: "Dengan bahagia kami mengundang Anda ke acara pernikahan kami.",
   },
   // Foto lokal di folder galeri/. Tambahkan nama file baru di sini.
