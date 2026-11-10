@@ -13,6 +13,10 @@ const CONFIG = {
   },
   // Foto lokal di folder galeri/. Tambahkan nama file baru di sini.
   gallery: ["galeri/1.jpg", "galeri/2.jpg", "galeri/3.jpg"],
+  // Ucapan & doa disimpan di Google Sheet (sheet "kuntet") lewat Apps Script.
+  // Kode Apps Script-nya ada di apps-script.gs
+  wishesUrl:
+    "https://script.google.com/macros/s/AKfycbwNbR9xnU4RQki-qkeqR7GK-waAIqqduuFvBUM2kW-PaYHWDg33CDrqfDk5vEZLue-IKQ/exec",
 };
 
 /* ========================================================================
@@ -355,12 +359,39 @@ function initWishes() {
   const form = $("#wishForm");
   const listEl = $("#wishList");
 
-  function render() {
-    const wishes = JSON.parse(localStorage.getItem("wishes") || "[]");
+  function renderMessage(text) {
     listEl.innerHTML = "";
-    wishes.slice().reverse().forEach((w) => {
+    const li = document.createElement("li");
+    li.textContent = text;
+    listEl.appendChild(li);
+  }
+
+  // Ambil daftar ucapan dari Google Sheet (terbaru di atas)
+  async function load() {
+    renderMessage("Memuat ucapan...");
+    try {
+      const res = await fetch(CONFIG.wishesUrl, { cache: "no-store" });
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      const data = await res.json();
+      if (!data || !Array.isArray(data.wishes)) throw new Error("Format tidak valid");
+      render(data.wishes);
+    } catch (err) {
+      renderMessage("Ucapan belum bisa dimuat. Coba muat ulang halaman.");
+    }
+  }
+
+  function render(wishes) {
+    listEl.innerHTML = "";
+    if (!wishes.length) {
+      renderMessage("Belum ada ucapan. Jadilah yang pertama!");
+      return;
+    }
+    wishes.forEach((w) => {
       const li = document.createElement("li");
-      const time = new Date(w.at).toLocaleDateString("id-ID", { day: "numeric", month: "short" });
+      const date = new Date(w.at);
+      const time = isNaN(date)
+        ? ""
+        : date.toLocaleDateString("id-ID", { day: "numeric", month: "short" });
       const nameEl = document.createElement("span");
       nameEl.className = "wishes__name";
       nameEl.textContent = w.name;
@@ -375,7 +406,7 @@ function initWishes() {
     });
   }
 
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const name = form.name.value.trim();
     const message = form.message.value.trim();
@@ -383,15 +414,32 @@ function initWishes() {
       showToast("Mohon lengkapi nama dan pesan.");
       return;
     }
-    const wishes = JSON.parse(localStorage.getItem("wishes") || "[]");
-    wishes.push({ name, message, at: new Date().toISOString() });
-    localStorage.setItem("wishes", JSON.stringify(wishes));
-    form.reset();
-    render();
-    showToast("Terima kasih atas ucapan dan doanya!");
+
+    const button = form.querySelector("button[type=submit]");
+    const label = button.textContent;
+    button.disabled = true;
+    button.textContent = "Mengirim...";
+    try {
+      // text/plain menghindari preflight CORS yang tidak didukung Apps Script
+      const res = await fetch(CONFIG.wishesUrl, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({ name, message }),
+      });
+      const result = await res.json();
+      if (!result || !result.ok) throw new Error((result && result.error) || "Gagal");
+      form.message.value = ""; // nama tamu (dari URL) tetap terisi
+      showToast("Terima kasih atas ucapan dan doanya!");
+      await load();
+    } catch (err) {
+      showToast("Ucapan gagal dikirim. Silakan coba lagi.");
+    } finally {
+      button.disabled = false;
+      button.textContent = label;
+    }
   });
 
-  render();
+  load();
 }
 
 /* ========================================================================
